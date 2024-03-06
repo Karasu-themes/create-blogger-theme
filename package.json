@@ -1,6 +1,6 @@
 {
   "name": "create-blogger-theme",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Start a new blogger template from scratch with BloggerBase",
   "main": "index.js",
   "keywords": [
