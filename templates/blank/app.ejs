@@ -1,41 +1,41 @@
 <html <%- htmlTags({
-    "b:css": false,
-    "b:js": true,
-    "b:defaultwidgetversion": 2,
-    "b:layoutsVersion": 3,
-    "expr:dir": 'data:blog.locale.languageDirection',
-    "expr:lang": 'data:blog.locale.language',
-    prefix: 'og: http://ogp.me/ns#' }) _%>>
-  
-  <head>
-    <!-- Head -->
-    <b:include name='@u:head' />
-  
-    <bskin>
-      @license;  
-      @variables;
-      @style(src="./style.css");
-    </bskin>
-  
-    <b:defaultmarkups>
-      <%# Common markups %>
-      <b:defaultmarkup type='Common'>
-        <%- include('./markups/common/head'); %>
-      </b:defaultmarkup>
-      
-      <%# Gadgets _%>
-      <%# Add here your gadgets %>
-    </b:defaultmarkups>
-  </head>
-  
-  <body>
+  "b:css": false,
+  "b:js": true,
+  "b:defaultwidgetversion": 2,
+  "b:layoutsVersion": 3,
+  "expr:dir": 'data:blog.locale.languageDirection',
+  "expr:lang": 'data:blog.locale.language',
+  prefix: 'og: http://ogp.me/ns#' }) _%>>
 
-    <b:section id='blog'>
-        <b:widget type="Blog"/>
-    </b:section>
-  
-    <script src='./script.js' cdta></script>
-  
-  </body>
-  
-  </html>
+<head>
+  <!-- Head -->
+  <b:include name='@u:head' />
+
+  <bskin>
+    @license;  
+    @variables;
+    <b:style src='/style.css' />
+  </bskin>
+
+  <b:defaultmarkups>
+    <%# Common markups %>
+    <b:defaultmarkup type='Common'>
+      <%- include('./markups/common/head'); %>
+    </b:defaultmarkup>
+    
+    <%# Gadgets _%>
+    <%# Add here your gadgets %>
+  </b:defaultmarkups>
+</head>
+
+<body>
+
+  <b:section id='blog'>
+      <b:widget type="Blog"/>
+  </b:section>
+
+  <b:script src='/script.js' />
+
+</body>
+
+</html>
