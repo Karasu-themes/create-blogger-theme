@@ -5,32 +5,18 @@ module.exports = function (name) {
 return `
 export default {
     /**
-     * Theme information
+     * Information
      */
     theme: {
         name: "${name}",
-        version: "1.0.0",
-    },
-    
-    /**
-     * Author information
-     */
-    author: {
+      description: "A starter blogger template with BloggerBase",
+      version: "1.0.0",
+      url: "https://github.com/Karasu-themes/BloggerBase",
+      license: "Release under MIT License",
+      author: {
         name: "MarceloTLD",
         url: "https://github.com/MarceloTLD"
-    },
-
-    /**
-     * License type
-     */
-    license: "Release under MIT License",
-
-    /**
-     * Plugins
-     */
-    plugins: {
-      postcss: [],
-      rollup: []
+      },
     }
 }
 `.trim();
