@@ -1,21 +1,25 @@
-<html <%- htmlTags({
-  "b:css": false,
-  "b:js": true,
-  "b:defaultwidgetversion": 2,
-  "b:layoutsVersion": 3,
-  "expr:dir": 'data:blog.locale.languageDirection',
-  "expr:lang": 'data:blog.locale.language',
-  prefix: 'og: http://ogp.me/ns#' }) _%>>
-
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html b:css="false" b:js="true" b:defaultwidgetversion="2" b:layoutsVersion="3" expr:dir="data:blog.locale.languageDirection" expr:lang="data:blog.locale.language" prefix="og: http://ogp.me/ns#">
+<!-- BloggerBase©karasu-themes | https://github.com/Karasu-themes/BloggerBase  -->
 <head>
   <!-- Head -->
   <b:include name='@u:head' />
 
-  <b:skin>
-    @license;  
-    @variables;
-    <b:style src='/style.css' />
-  </b:skin>
+  <b:skin version='<%= version %>'><![CDATA[
+    /*!************************************************
+    * Blogger Template Style
+    * Name: <%= name %>
+    * version: <%= version %>
+    * Description: <%= description %>
+    * Theme URL: <%= url %>
+    * Author: <%= author.name %>
+    * Author URL: <%= author.url %>
+    * License: <%= license %>
+    **************************************************/
+
+    @style(src="/style.css");
+  ]]></b:skin>
 
   <b:defaultmarkups>
     <%# Common markups %>
@@ -34,7 +38,9 @@
       <b:widget type="Blog"/>
   </b:section>
 
-  <b:script src='/script.js' />
+  <script>
+    @script(src="/script.js");
+  </script>
 
 </body>
 
