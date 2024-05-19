@@ -3,7 +3,7 @@
  */
 module.exports = function (name) {
   return `
-export const themeConfig = {
+export default = {
   name: "${name}",
   description: "A basic tool for building blogger template",
   version: "1.0.0",
