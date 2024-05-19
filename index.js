@@ -17,15 +17,24 @@ const createConfigFile = require('./utils/create-config-files');
 
 let projectName;
 const CURRENTPATH = __dirname;
-const DIRPATH = process.env.PWD;
+const DIRPATH = process.cwd();
 
-program.arguments("<project-directory>")
+program
 .option("-t, --template <value>", "Establece la plantilla a utilizar")
-.action(async (name, options) => {
-    projectName = name;
-    const template = options.template ?? "blank";
-    const thisDirName = path.join(CURRENTPATH, "templates", template.toLowerCase());
-    const dirName = path.join(DIRPATH, projectName);
+.action(async (options) => {
+
+    // Preguntamos por el nombre de la carpeta que se va a utilizar
+    const { getProjectDirectory } = await prompts({
+        type: 'text',
+        name: 'getProjectDirectory',
+        initial: 'my-theme',
+        message: 'What is your project named?'
+    });
+    projectName=getProjectDirectory;
+    const template = "blank";
+    const dirName = DIRPATH + "/" + projectName;
+
+    // Preguntamos por la plantilla base que usará
 
     // revisamos que la carpeta no existe en la ruta actual
     if (fs.existsSync(dirName)) {
@@ -41,7 +50,7 @@ program.arguments("<project-directory>")
         fs.mkdirSync(dirName);
 
         // Creamos el archivo package.json con la información necesaria
-        fs.writeFileSync(path.resolve(dirName, "package.json"), createPackageJson(projectName));
+        fs.writeFileSync(path.resolve(dirName, "package.json"), createPackageJson(projectName, template));
         console.log(chalk.greenBright(`The ${chalk.bold("package.json")} has been successfully created. ✔`));
 
         // Creamos el archivo de configuración theme.config.js
@@ -56,7 +65,7 @@ program.arguments("<project-directory>")
         const { installConfigFile } = await prompts({
             type: 'text',
             name: 'installConfigFile',
-            initial: 'yes | no',
+            initial: 'No / Yes',
             message: 'Do you want to create postcss.config.js y rollup.config.js files right now?'
         });
 
@@ -67,18 +76,18 @@ program.arguments("<project-directory>")
         }
 
         // Copiamos el template seleccionado
-        fse.copySync(thisDirName, path.join(dirName, "app"));
+        fse.copySync(path.resolve(path.join(CURRENTPATH, "templates", template)), path.join(dirName, "app"));
     }
 
     // Debemos instalar las dependencias ahora mismo o le dejamos ese paso al usuario?
-    const { canInstallDependencies } = await prompts({
+    const { installAllDependencies } = await prompts({
         type: 'text',
-        name: 'canInstallDependencies',
+        name: 'installAllDependencies',
         initial: 'yes | no',
         message: 'Do you want to install the dependencies right now?'
     });
 
-    if (canInstallDependencies.toLowerCase() == "yes") {
+    if (installAllDependencies.toLowerCase() == "yes") {
         console.log(chalk.bold('Installing dependencies...'))
         process.chdir(dirName); // ejecutamos el comando en la ruta dónde instalamos el proyecto
 
